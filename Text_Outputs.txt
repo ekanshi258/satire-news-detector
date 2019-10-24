@@ -1,2 +1,5 @@
 Common top 5 unigrams from both subreddits: {'man','trump'}
 (refer: nlp.py, line 47)
+
+Common top 5 bigrams from both subreddits: {'year old'}
+(refer: nlp.py, line 76)

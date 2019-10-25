@@ -1,7 +1,7 @@
 import pandas as pd
 from imports import bars
 from sklearn.feature_extraction import stop_words
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 
 onion = pd.read_csv('onion.csv')
 notonion = pd.read_csv('notonion.csv')
@@ -13,6 +13,10 @@ dataf = dataf.reset_index(drop=True)														#into one dataframe
 # 1 for TheOnion (false news) , 0 for noththeonion (genuine news)
 dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
 
+# dataf.to_csv("combined.csv") 					#To make "combined.csv"
+
+
+
 #Count Vectorization
 #------------unigrams------------
 
@@ -20,7 +24,6 @@ dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
 vectorizer = CountVectorizer(stop_words = 'english', ngram_range = (1,1))
 mask = dataf['subreddit'] == 1
 onion_titles = dataf[mask]['title']															#variable for TheOnion titles
-#fit vectorizer on the onion titles:
 onion_cv = vectorizer.fit_transform(onion_titles)
 onion_cv_df = pd.DataFrame(onion_cv.toarray(), columns = vectorizer.get_feature_names())		#convert to dataframe
 
@@ -74,3 +77,18 @@ onion_5 = set(onion_top5.index)
 common_bi = onion_5.intersection(notonion_5)	
 
 print(common_bi)
+
+#Stop words list
+
+stop = stop_words.ENGLISH_STOP_WORDS
+stop = list(stop)
+common_uni = list(common_uni)
+common_bi = list(common_bi)
+for i in common_uni:
+	stop.append(i)
+for i in common_bi:
+	words = i.split(" ")
+	for word in words:
+		stop.append(word)
+
+print(stop)

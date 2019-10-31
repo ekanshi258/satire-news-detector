@@ -54,3 +54,14 @@ plt.ylabel('Actual Subreddit label')
 plt.xlabel('Predicted Subreddit label')
 
 plt.show()
+
+cnf = np.array(cnf).tolist()
+tnfp, fntp = cnf
+fn, tp = fntp
+tn, fp = tnfp
+
+print("Percentage Accuracy:",round(metrics.accuracy_score(ytest, pred)*100, 2),'%')
+print("Precision:",round(metrics.precision_score(ytest, pred)*100, 2), '%')
+print("Recall:",round(metrics.recall_score(ytest, pred)*100, 2), '%')
+print("Specificity:", round((tn/(tn+fp))*100, 2), '%')
+print("Misclassification:", round((fp+fn)/(tn+fp+fn+tn)*100, 2), '%')

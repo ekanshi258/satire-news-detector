@@ -3,8 +3,8 @@ from imports import bars
 from sklearn.feature_extraction import stop_words
 from sklearn.feature_extraction.text import CountVectorizer
 
-onion = pd.read_csv('onion.csv')
-notonion = pd.read_csv('notonion.csv')
+onion = pd.read_csv('clean_data/onion.csv')
+notonion = pd.read_csv('clean_data/notonion.csv')
 
 dataf = pd.concat([onion[['subreddit','title']],notonion[['subreddit','title']]], axis = 0)	#concatenating both data
 dataf = dataf.reset_index(drop=True)														#into one dataframe	

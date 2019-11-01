@@ -2,6 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 from sklearn.feature_extraction.text import CountVectorizer
+import joblib
 import matplotlib.pyplot as plt
 import seaborn as sb
 import pandas as pd
@@ -29,6 +30,10 @@ xcv_test = cvec.transform(xtest)
 
 #fit classifier
 mnb.fit(xcv_train, ytrain)
+
+#saving the model
+filename = 'final_model.sav'
+joblib.dump(mnb, filename)
 
 #predictions
 pred = mnb.predict(xcv_test)

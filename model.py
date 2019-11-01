@@ -8,12 +8,12 @@ import pandas as pd
 import numpy as np
 
 
-onion = pd.read_csv('clean_data/onion.csv')
-notonion = pd.read_csv('clean_data/notonion.csv')
+fake = pd.read_csv('clean_data/fake.csv')
+real = pd.read_csv('clean_data/real.csv')
 
-dataf = pd.concat([onion[['subreddit','title']],notonion[['subreddit','title']]], axis = 0)	#concatenating both data
+dataf = pd.concat([fake[['subreddit','title']],real[['subreddit','title']]], axis = 0)	#concatenating both data
 dataf = dataf.reset_index(drop=True)														#into one dataframe	
-dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
+dataf["subreddit"]=dataf["subreddit"].map({"notthefake":0, "TheOnion":1})
 
 x = dataf['title']
 y = dataf['subreddit']

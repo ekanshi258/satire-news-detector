@@ -3,14 +3,14 @@ from imports import bars
 from sklearn.feature_extraction import stop_words
 from sklearn.feature_extraction.text import CountVectorizer
 
-onion = pd.read_csv('clean_data/onion.csv')
-notonion = pd.read_csv('clean_data/notonion.csv')
+fake = pd.read_csv('clean_data/fake.csv')
+real = pd.read_csv('clean_data/real.csv')
 
-dataf = pd.concat([onion[['subreddit','title']],notonion[['subreddit','title']]], axis = 0)	#concatenating both data
+dataf = pd.concat([fake[['subreddit','title']],real[['subreddit','title']]], axis = 0)	#concatenating both data
 dataf = dataf.reset_index(drop=True)														#into one dataframe	
 
 #binarize
-# 1 for TheOnion (false news) , 0 for noththeonion (genuine news)
+# 1 for TheOnion (false news) , 0 for nothetheonion (genuine news)
 dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
 
 # dataf.to_csv("combined.csv") 					#To make "combined.csv"
@@ -23,29 +23,29 @@ dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
 #subreddit = 1
 vectorizer = CountVectorizer(stop_words = 'english', ngram_range = (1,1))
 mask = dataf['subreddit'] == 1
-onion_titles = dataf[mask]['title']															#variable for TheOnion titles
-onion_cv = vectorizer.fit_transform(onion_titles)
-onion_cv_df = pd.DataFrame(onion_cv.toarray(), columns = vectorizer.get_feature_names())		#convert to dataframe
+fake_titles = dataf[mask]['title']															#variable for TheOnion titles
+fake_cv = vectorizer.fit_transform(fake_titles)
+fake_cv_df = pd.DataFrame(fake_cv.toarray(), columns = vectorizer.get_feature_names())		#convert to dataframe
 
 #subreddit = 0 
 vectorizer2 = CountVectorizer(stop_words = 'english', ngram_range = (1,1))
 mask2 = dataf['subreddit'] == 0
-notonion_titles = dataf[mask2]['title']
-notonion_cv = vectorizer2.fit_transform(notonion_titles)
-notonion_cv_df = pd.DataFrame(notonion_cv.toarray(), columns = vectorizer2.get_feature_names())
+real_titles = dataf[mask2]['title']
+real_cv = vectorizer2.fit_transform(real_titles)
+real_cv_df = pd.DataFrame(real_cv.toarray(), columns = vectorizer2.get_feature_names())
 
 #get unigrams from each 
-onion_words = onion_cv_df.sum(axis=0)
-onion_top5 = onion_words.sort_values(ascending = False).head(5)
-bars(onion_top5.values, onion_top5.index, 'Top 5 TheOnion unigrams','g')
+fake_words = fake_cv_df.sum(axis=0)
+fake_top5 = fake_words.sort_values(ascending = False).head(5)
+bars(fake_top5.values, fake_top5.index, 'Top 5 TheOnion unigrams','g')
 
-notonion_words = notonion_cv_df.sum(axis = 0)
-notonion_top5 = notonion_words.sort_values(ascending=False).head(5)
-bars(notonion_top5.values, notonion_top5.index, 'Top 5 nottheonion unigrams', 'b')
+real_words = real_cv_df.sum(axis = 0)
+real_top5 = real_words.sort_values(ascending=False).head(5)
+bars(real_top5.values, real_top5.index, 'Top 5 nottheonion unigrams', 'b')
 
-notonion_5 = set(notonion_top5.index)
-onion_5 = set(onion_top5.index)
-common_uni = onion_5.intersection(notonion_5)									#common unigrams between the two
+real_5 = set(real_top5.index)
+fake_5 = set(fake_top5.index)
+common_uni = fake_5.intersection(real_5)									#common unigrams between the two
 
 print(common_uni)
 
@@ -53,28 +53,28 @@ print(common_uni)
 
 vectorizer = CountVectorizer(stop_words = 'english', ngram_range = (2,2))
 mask = dataf['subreddit'] == 1
-onion_titles = dataf[mask]['title']															
-onion_cv = vectorizer.fit_transform(onion_titles)
-onion_cv_df = pd.DataFrame(onion_cv.toarray(), columns = vectorizer.get_feature_names())		#convert to dataframe
+fake_titles = dataf[mask]['title']															
+fake_cv = vectorizer.fit_transform(fake_titles)
+fake_cv_df = pd.DataFrame(fake_cv.toarray(), columns = vectorizer.get_feature_names())		#convert to dataframe
 
 vectorizer2 = CountVectorizer(stop_words = 'english', ngram_range = (2,2))
 mask2 = dataf['subreddit'] == 0
-notonion_titles = dataf[mask2]['title']
-notonion_cv = vectorizer2.fit_transform(notonion_titles)
-notonion_cv_df = pd.DataFrame(notonion_cv.toarray(), columns = vectorizer2.get_feature_names())
+real_titles = dataf[mask2]['title']
+real_cv = vectorizer2.fit_transform(real_titles)
+real_cv_df = pd.DataFrame(real_cv.toarray(), columns = vectorizer2.get_feature_names())
 
 #get bigrams from each 
-onion_words = onion_cv_df.sum(axis=0)
-onion_top5 = onion_words.sort_values(ascending = False).head(5)
-bars(onion_top5.values, onion_top5.index, 'Top 5 TheOnion bigrams','g')
+fake_words = fake_cv_df.sum(axis=0)
+fake_top5 = fake_words.sort_values(ascending = False).head(5)
+bars(fake_top5.values, fake_top5.index, 'Top 5 TheOnion bigrams','g')
 
-notonion_words = notonion_cv_df.sum(axis = 0)
-notonion_top5 = notonion_words.sort_values(ascending=False).head(5)
-bars(notonion_top5.values, notonion_top5.index, 'Top 5 nottheonion bigrams', 'b')
+real_words = real_cv_df.sum(axis = 0)
+real_top5 = real_words.sort_values(ascending=False).head(5)
+bars(real_top5.values, real_top5.index, 'Top 5 nottheonion bigrams', 'b')
 
-notonion_5 = set(notonion_top5.index)
-onion_5 = set(onion_top5.index)
-common_bi = onion_5.intersection(notonion_5)	
+real_5 = set(real_top5.index)
+fake_5 = set(fake_top5.index)
+common_bi = fake_5.intersection(real_5)	
 
 print(common_bi)
 

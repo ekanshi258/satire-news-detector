@@ -1,19 +1,19 @@
 from imports import bars
 import pandas as pd
 
-onion = pd.read_csv('onion.csv')
-notonion = pd.read_csv('notonion.csv')
+fake = pd.read_csv('fake.csv')
+real = pd.read_csv('real.csv')
 
-#Plot the onion domains vs posts
-onion_domain = onion['domain'].value_counts()
-onion_domain = onion_domain.sort_values(ascending = False).head(20)			#number of posts per domain
-onion_domain_idx = list(onion_domain.index)							#y-axis: domains
+#Plot the fake domains vs posts
+fake_domain = fake['domain'].value_counts()
+fake_domain = fake_domain.sort_values(ascending = False).head(20)			#number of posts per domain
+fake_domain_idx = list(fake_domain.index)							#y-axis: domains
 
-bars(onion_domain.values, onion_domain_idx, 'Domains referenced in r/TheOnion','g')
+bars(fake_domain.values, fake_domain_idx, 'Domains referenced in r/TheOnion','g')
 
-#plot nottheonion domains vs posts
-notonion_domain = notonion['domain'].value_counts()
-notonion_domain = notonion_domain.sort_values(ascending=False).head(40)
-notonion_domain_idx = list(notonion_domain.index)
+#plot notthefake domains vs posts
+real_domain = real['domain'].value_counts()
+real_domain = real_domain.sort_values(ascending=False).head(40)
+real_domain_idx = list(real_domain.index)
 
-bars(notonion_domain.values, notonion_domain_idx, 'Domains referenced in r/NotTheOnion','b')
+bars(real_domain.values, real_domain_idx, 'Domains referenced in r/NotTheOnion','b')

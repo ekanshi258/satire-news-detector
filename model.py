@@ -13,7 +13,7 @@ real = pd.read_csv('clean_data/real.csv')
 
 dataf = pd.concat([fake[['subreddit','title']],real[['subreddit','title']]], axis = 0)	#concatenating both data
 dataf = dataf.reset_index(drop=True)														#into one dataframe	
-dataf["subreddit"]=dataf["subreddit"].map({"notthefake":0, "TheOnion":1})
+dataf["subreddit"]=dataf["subreddit"].map({"nottheonion":0, "TheOnion":1})
 
 x = dataf['title']
 y = dataf['subreddit']

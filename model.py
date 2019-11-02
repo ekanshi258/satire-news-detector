@@ -28,12 +28,16 @@ cvec.fit(xtrain)
 xcv_train = cvec.transform(xtrain)
 xcv_test = cvec.transform(xtest)
 
+#saving the  vectorizer
+filename_vectorizer = 'vectorizer.sav'
+joblib.dump(cvec, filename_vectorizer)
+
 #fit classifier
 mnb.fit(xcv_train, ytrain)
 
 #saving the model
-filename = 'final_model.sav'
-joblib.dump(mnb, filename)
+filename_model = 'final_model.sav'
+joblib.dump(mnb, filename_model)
 
 #predictions
 pred = mnb.predict(xcv_test)

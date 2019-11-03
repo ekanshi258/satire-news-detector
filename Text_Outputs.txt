@@ -18,6 +18,15 @@ test score 0.8972446338864363
 
 {'cvec__ngram_range': (1, 3), 'nb__alpha': 0.36}
 
+optimal.py, line 43-54:
+
+
+best score:  0.8531411752765655
+train score:  0.9618897797625089
+test score:  0.8652762977622165
+
+{'lr__C': 1, 'vect__ngram_range': (1, 1)}
+
 
 Confusion matrix: 
 [[2701  321]
@@ -30,5 +39,7 @@ Precision: 90.87 %
 Recall: 90.02 %
 Specificity: 89.38 %
 Misclassification: 11.11 %
+
+
 
 

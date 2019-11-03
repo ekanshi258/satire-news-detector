@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+  <legend class="border-bottom mb-4">
+    Results for given headline:
+  </legend>
+	{% for result in results %}
+		<article class="media content-section">
+          <div class="media-body">
+            <h2><a class="article-title" href="#">{{ result }}</a></h2>
+          </div>
+	</article>
+	{% endfor %}
+{% endblock content%}

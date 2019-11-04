@@ -13,6 +13,19 @@ Made for an Assignment for the Artificial Intelligence course (CS F407) at BITS 
 `Text_Outputs.txt`: Intermediate outputs the NLP process, for reference.  
 `model.py` : Working model which uses a Naive Bayes Classifier at its core.  
 `optimal.py` : GridSearch parameters on two different models for determining the best model and its parameters.
+
+## How to run
+Clone the repo  
+Run ```frontend/main.py```  
+### Libraries
+Make sure you have the following libraries installed:
+```
+sklearn  
+matplotlib  
+seaborn  
+pandas  
+numpy
+```
 # Group
 Ekanshi Agrawal - [@ekanshi258](https://github.com/ekanshi258)  
 Kushagra Srivastava - [@z3r0dmg](https://github.com/z3r0dmg)  

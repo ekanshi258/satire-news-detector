@@ -1,17 +1,17 @@
 from imports import bars
 import pandas as pd
 
-fake = pd.read_csv('./clean_data/fake.csv')
+satire = pd.read_csv('./clean_data/satire.csv')
 real = pd.read_csv('./clean_data/real.csv')
 
-#Plot the fake domains vs posts
-fake_domain = fake['domain'].value_counts()
-fake_domain = fake_domain.sort_values(ascending = False).head(10)			#number of posts per domain
-fake_domain_idx = list(fake_domain.index)							#y-axis: domains
+#Plot the satire domains vs posts
+satire_domain = satire['domain'].value_counts()
+satire_domain = satire_domain.sort_values(ascending = False).head(10)			#number of posts per domain
+satire_domain_idx = list(satire_domain.index)							#y-axis: domains
 
-bars(fake_domain.values, fake_domain_idx, 'Domains referenced in fake news dataset','g')
+bars(satire_domain.values, satire_domain_idx, 'Domains referenced in satire news dataset','g')
 
-#plot notthefake domains vs posts
+#plot notthesatire domains vs posts
 real_domain = real['domain'].value_counts()
 real_domain = real_domain.sort_values(ascending=False).head(10)
 real_domain_idx = list(real_domain.index)

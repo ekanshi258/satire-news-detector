@@ -27,7 +27,7 @@ def getPrediction(headline):
     if(result[0] == 0):
         return ["real"]
     else:
-        return ["fake"]
+        return ["satire"]
 
 #Main page
 @app.route("/", methods=['GET', 'POST'])

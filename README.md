@@ -1,5 +1,6 @@
-# fake-news-detector
-Made for an Assignment for the Artificial Intelligence course (CS F407) at BITS Pilani, Hyderabad.
+# satire-news-detector
+Made for an Assignment for the Artificial Intelligence course (CS F407) at BITS Pilani, Hyderabad.  
+This system takes in an input (news headline) and says whether the headline sounds satirical (from news sources that mock real life news) or is a genuine news headline.
 ### Files and Folders
 `barplots/`: Bar plots of useful data from real and fake news datasets (scraped from online sources)  
 `data/`: .csv files of data  
